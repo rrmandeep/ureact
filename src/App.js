@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import person from './Person/Person';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -48,6 +49,26 @@ class App extends Component {
       cursor: 'pointer'
     };
     
+    let persons = null;
+    if (this.state.doseShow) {
+      persons = (
+        <div>
+          <Person 
+            name={this.state.persons[0]['name']} 
+            age={this.state.persons[0]['age']}/>
+          <Person 
+            name={this.state.persons[1]['name']} 
+            age={this.state.persons[1]['age']}
+            click={this.swichNameHandler.bind(this, "Ishmeet")}
+            change={this.changeNameHandler}>I am from Ujjain
+          </Person>
+          <Person 
+            name={this.state.persons[2]['name']} 
+            age={this.state.persons[2]['age']}>I am from Ujjain
+          </Person>
+        </div>
+      );
+    }
     return (
       <div className="App">
         <h1>I am a react app</h1>
@@ -55,23 +76,7 @@ class App extends Component {
         <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
         <button style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
         <button style={style} onClick={ this.toggleNames}>Toggle Name</button>
-        { this.state.doseShow ?
-          <div>
-            <Person 
-              name={this.state.persons[0]['name']} 
-              age={this.state.persons[0]['age']}/>
-            <Person 
-              name={this.state.persons[1]['name']} 
-              age={this.state.persons[1]['age']}
-              click={this.swichNameHandler.bind(this, "Ishmeet")}
-              change={this.changeNameHandler}>I am from Ujjain
-            </Person>
-            <Person 
-              name={this.state.persons[2]['name']} 
-              age={this.state.persons[2]['age']}>I am from Ujjain
-            </Person>
-          </div> : null
-        }      
+        { persons }      
       </div>
     );
    }
