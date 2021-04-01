@@ -9,7 +9,8 @@ class App extends Component {
       {name: "Satwant", age: "32"},
       {name: "Kimmat", age: "33"},
     ],
-    otherState: "Some other state"
+    otherState: "Some other state",
+    doseShow: true
   } 
 
   swichNameHandler = (newName) => {
@@ -33,6 +34,11 @@ class App extends Component {
       ]
     })
   } 
+
+  toggleNames = () => {
+    const doseShowold = this.state.doseShow
+    this.setState({doseShow: !doseShowold});
+  }
   render() {
     const style = {
       backgroundColor: 'white',
@@ -48,22 +54,29 @@ class App extends Component {
         {/* passing arrguments to function
         <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
         <button style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
-        <Person 
-          name={this.state.persons[0]['name']} 
-          age={this.state.persons[0]['age']}/>
-        <Person 
-          name={this.state.persons[1]['name']} 
-          age={this.state.persons[1]['age']}
-          click={this.swichNameHandler.bind(this, "Ishmeet")}
-          change={this.changeNameHandler}>I am from Ujjain
-        </Person>
-        <Person 
-          name={this.state.persons[2]['name']} 
-          age={this.state.persons[2]['age']}>I am from Ujjain
-        </Person>
+        <button style={style} onClick={ this.toggleNames}>Toggle Name</button>
+        { this.state.doseShow ?
+          <div>
+            <Person 
+              name={this.state.persons[0]['name']} 
+              age={this.state.persons[0]['age']}/>
+            <Person 
+              name={this.state.persons[1]['name']} 
+              age={this.state.persons[1]['age']}
+              click={this.swichNameHandler.bind(this, "Ishmeet")}
+              change={this.changeNameHandler}>I am from Ujjain
+            </Person>
+            <Person 
+              name={this.state.persons[2]['name']} 
+              age={this.state.persons[2]['age']}>I am from Ujjain
+            </Person>
+          </div> : null
+        }      
       </div>
     );
    }
 }
 
 export default App;
+
+
