@@ -6,7 +6,7 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {id: '1', name: "Mandeep", age: "28"},
+      {id: '1', name: "Mandeep SIngh", age: "28"},
       {id: '2', name: "Satwant", age: "32"},
       {id: '3', name: "Kimmat", age: "33"},
     ],
@@ -30,7 +30,7 @@ class App extends Component {
     const personIndex = this.state.persons.findIndex(person => {
       return person.id === id;
     })
-    
+
     const person = {...this.state.persons[personIndex]}
 
     person.name = event.target.value;
@@ -53,7 +53,8 @@ class App extends Component {
   }
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -76,10 +77,19 @@ class App extends Component {
           }
         </div>
       );
+      style.backgroundColor = 'red'
+    }
+
+    let classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('redColor'); 
+    }
+    if (this.state.persons <= 1) {
+      classes.push('boldFont');
     }
     return (
       <div className="App">
-        <h1>I am a react app</h1>
+        <h1 className={classes.join(' ')}>I am a react app</h1>
         {/* passing arrguments to function
         <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
         <button style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
