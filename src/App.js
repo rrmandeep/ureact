@@ -40,6 +40,12 @@ class App extends Component {
     const doseShowold = this.state.doseShow
     this.setState({doseShow: !doseShowold});
   }
+
+  deletePerson = (personIndex) => {
+    const persons = this.state.persons
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
+  }
   render() {
     const style = {
       backgroundColor: 'white',
@@ -53,9 +59,13 @@ class App extends Component {
     if (this.state.doseShow) {
       persons = (
         <div>
-          { this.state.persons.map(person => {
-              return <Person name={person.name} 
-              age={person.age} />
+          { this.state.persons.map((person, index) => {
+              return <Person 
+              // change={this.changeNameHandler}
+              click={ () => this.deletePerson(index)}
+              name={person.name} 
+              age={person.age} 
+              />
             })
           }
         </div>
