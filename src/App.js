@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
-import Radium, {StyleRoot} from 'radium';
 import './App.css';
+import styled from 'styled-components' 
 import Person from './Person/Person';
+
+
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: lightgreen;
+    color: black;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -54,19 +69,6 @@ class App extends Component {
     this.setState({persons: persons})
   }
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    };
-    
     let persons = null;
     if (this.state.doseShow) {
       persons = (
@@ -83,11 +85,11 @@ class App extends Component {
           }
         </div>
       );
-      style.backgroundColor = 'red'
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      // style.backgroundColor = 'red'
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
     }
 
     let classes = []
@@ -98,20 +100,18 @@ class App extends Component {
       classes.push('boldFont');
     }
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1 className={classes.join(' ')}>I am a react app</h1>
-          {/* passing arrguments to function
-          <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
-          <button key="nameSwitch" style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
-          <button key="toggleName" style={style} onClick={ this.toggleNames}>Toggle Name</button>
-          { persons }      
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1 className={classes.join(' ')}>I am a react app</h1>
+        {/* passing arrguments to function
+        <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
+        <StyledButton  onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</StyledButton>
+        <StyledButton  onClick={ this.toggleNames}>Toggle Name</StyledButton>
+        { persons }      
+      </div>
     );
    }
 }
 
-export default Radium(App);
+export default App;
 
 
