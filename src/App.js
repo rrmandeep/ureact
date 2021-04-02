@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import './App.css';
-import person from './Person/Person';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -27,9 +27,11 @@ class App extends Component {
   }
 
   changeNameHandler = (event, id) => {
+    // findIndex is array method to find index of a requried array element
     const personIndex = this.state.persons.findIndex(person => {
       return person.id === id;
     })
+
 
     const person = {...this.state.persons[personIndex]}
 
@@ -58,7 +60,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
     
     let persons = null;
@@ -78,6 +84,10 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red'
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     let classes = []
@@ -92,14 +102,14 @@ class App extends Component {
         <h1 className={classes.join(' ')}>I am a react app</h1>
         {/* passing arrguments to function
         <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
-        <button style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
-        <button style={style} onClick={ this.toggleNames}>Toggle Name</button>
+        <button key="nameSwitch" style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
+        <button key="toggleName" style={style} onClick={ this.toggleNames}>Toggle Name</button>
         { persons }      
       </div>
     );
    }
 }
 
-export default App;
+export default Radium(App);
 
 
