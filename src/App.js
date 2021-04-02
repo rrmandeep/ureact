@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -98,14 +98,16 @@ class App extends Component {
       classes.push('boldFont');
     }
     return (
-      <div className="App">
-        <h1 className={classes.join(' ')}>I am a react app</h1>
-        {/* passing arrguments to function
-        <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
-        <button key="nameSwitch" style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
-        <button key="toggleName" style={style} onClick={ this.toggleNames}>Toggle Name</button>
-        { persons }      
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1 className={classes.join(' ')}>I am a react app</h1>
+          {/* passing arrguments to function
+          <button onClick={this.swichNameHandler.bind(this, "Ishmeet")}>Click me</button> */}
+          <button key="nameSwitch" style={style} onClick={ () => this.swichNameHandler("Ishmeet!!!")}>Click me</button>
+          <button key="toggleName" style={style} onClick={ this.toggleNames}>Toggle Name</button>
+          { persons }      
+        </div>
+      </StyleRoot>
     );
    }
 }
